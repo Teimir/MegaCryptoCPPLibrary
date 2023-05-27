@@ -11,14 +11,17 @@ const std::string Btest[][3] = {{"24", "11000", "00011000"},
 	{"568","1000111000","00111000"},
 	{"953267","11101000101110110011","10110011"}
 }; 
+const std::string ver = "0.1.1B";
 
 
 int test(bool silent)
 {
 	int a = 0;
-	
+	std::cout << std::endl << "\x1b[33m          Ver." + ver + " \x1b[0m" << std::endl << std::endl;
+
+
 	std::cout << "\x1b[33m          Module 1 \x1b[0m" << std::endl;
-	std::cout << "          1251 ASCII" << std::endl;
+	std::cout << "          1251 CodeTable" << std::endl << std::endl;
 	try {
 		int c = 0;
 		for (int i = 32; i < 256; i++) {
@@ -39,7 +42,9 @@ int test(bool silent)
 		a = 1;
 	}
 
-	std::cout << "\x1b[33m          Module 2 \x1b[0m" << std::endl;
+	
+	
+	std::cout << std::endl << "\x1b[33m          Module 2 \x1b[0m" << std::endl << std::endl;
 	std::cout << "Binary operations (Binary.h)" << std::endl;
 	try {
 		std::cout << "-- First - lengthless " << std::endl;
@@ -70,11 +75,47 @@ int test(bool silent)
 			}
 		}
 
+		std::cout << "-- Third - decode " << std::endl;
+		for (int i = 0; i < lenbtest; i++) {
+			int num = to_dec(Btest[i][1]);
+			std::string l = Btest[i][0] == std::to_string(num) ? " OK " : " ERROR ";
+			l = Btest[i][1] + " " + Btest[i][0] + " " + std::to_string(num) + " " + l;
+			if (Btest[i][0] != std::to_string(num)) {
+				std::cout << "\x1b[31m" << l << "\x1b[0m" << std::endl;
+				return 2;
+			}
+			else {
+				std::cout << "\x1b[32m" << l << "\x1b[0m" << std::endl;
+			}
+		}
+
+		//Две ошибки на позиции 4 и 5 обязательны и показывают, что программа работает правильно!!!!
+
+		std::cout << "-- Third - decode length has" << std::endl;
+		for (int i = 0; i < lenbtest; i++) {
+			int num = to_dec(Btest[i][2]);
+			std::string l = Btest[i][0] == std::to_string(num) ? " OK " : " ERROR ";
+			l = Btest[i][2] + " " + Btest[i][0] + " " + std::to_string(num) + " " + l;
+			if ((Btest[i][0] != std::to_string(num)) && (i < 4)) {
+				std::cout << "\x1b[31m" << l << "\x1b[0m" << std::endl;
+				return 2;
+			}
+			else if (Btest[i][0] != std::to_string(num)) {
+				std::cout << "\x1b[31m" << l << "But OK \x1b[0m" << std::endl;
+			}
+			else {
+				std::cout << "\x1b[32m" << l << "\x1b[0m" << std::endl;
+			}
+		}
+
+
+
 	}
 	catch (const char* error) {
 		std::cout << " Binary ERROR " << std::endl << error;
 		a = 2;
 	}
+
 
 
 	return a;

@@ -1,7 +1,8 @@
 #include <string>
 #include <algorithm> 
-#include "Binary.h"
 #include <iostream>
+#include <cmath> 
+#include "Binary.h"
 
 int to_bit(int number) {
 	if (number / 2 != 0) to_bit(number / 2);
@@ -35,3 +36,10 @@ std::string to_bin(int number, int length) {
 	return s;
 }
 
+int to_dec(std::string s) {
+	int maxP = s.length()-1, num = 0;
+	for (int i = 0; i < s.length(); i++) {
+		num = num + ((int)s[i] - 48) * pow(2, maxP - i);
+	}
+	return num;
+}
