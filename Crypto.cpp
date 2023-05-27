@@ -18,7 +18,7 @@ int test(bool silent)
 	int a = 0;
 	
 	std::cout << "\x1b[33m          Module 1 \x1b[0m" << std::endl;
-	std::cout << "standart ASCII" << std::endl;
+	std::cout << "          1251 ASCII" << std::endl;
 	try {
 		int c = 0;
 		for (int i = 32; i < 256; i++) {
@@ -47,7 +47,7 @@ int test(bool silent)
 			std::string bin = to_bin(stoi(Btest[i][0]));
 			std::string l = Btest[i][1] == bin ? " OK " : " ERROR ";
 			l = Btest[i][0] + " " + Btest[i][1] + " " + bin + " " + l;
-			if (l == " ERROR ") {
+			if (Btest[i][1] != bin) {
 				std::cout << "\x1b[31m" <<  l << "\x1b[0m" << std::endl;
 				return 2;
 			}
@@ -61,7 +61,7 @@ int test(bool silent)
 			std::string bin = to_bin(stoi(Btest[i][0]), 8);
 			std::string l = Btest[i][2] == bin ? " OK " : " ERROR ";
 			l = Btest[i][0] + " " + Btest[i][2] + " " + bin + " " + l;
-			if (l == " ERROR ") {
+			if (Btest[i][2] != bin) {
 				std::cout << "\x1b[31m" << l << "\x1b[0m" << std::endl;
 				return 2;
 			}
