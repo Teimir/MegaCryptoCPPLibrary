@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Binary.cpp" />
     <ClCompile Include="Crypto.cpp" />
     <ClCompile Include="MegaCryptoCPPLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Binary.h" />
     <ClInclude Include="Crypto.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

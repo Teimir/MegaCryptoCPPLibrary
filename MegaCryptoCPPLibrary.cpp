@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Crypto.h"
+#include "Binary.h"
 
 
 
