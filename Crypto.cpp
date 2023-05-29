@@ -3,6 +3,8 @@
 #include "Crypto.h"
 #include "Binary.h"
 
+const std::string ver = "0.1.1B";
+
 const int lenbtest = 6;
 const std::string Btest[][3] = {{"24", "11000", "00011000"},
 	{"22", "10110", "00010110"},
@@ -11,7 +13,13 @@ const std::string Btest[][3] = {{"24", "11000", "00011000"},
 	{"568","1000111000","00111000"},
 	{"953267","11101000101110110011","10110011"}
 }; 
-const std::string ver = "0.1.1B";
+const int lenbintranstest = 3;
+const std::string Bintranstest[][3] = { {"Hello", "0100100001100101011011000110110001101111"}, {"Test", "01010100011001010111001101110100"}, {"Ëÿ", "11111111111111111111111111001011111111111111111111111111111111","32"}};
+
+
+
+//Latin A-Z, a-z, Rus A-ÿ, a-ÿ
+const int Letinxs[][2] = { {65,90}, {97,122}, {192,223}, {224,255} };
 
 
 int test(bool silent)
@@ -108,7 +116,39 @@ int test(bool silent)
 			}
 		}
 
+		std::cout << "-- Fourth - encode string to binary" << std::endl;
+		for (int i = 0; i < lenbintranstest; i++) {
+			std::string ok = "";
+			std::string s = Bin_encrypt(Bintranstest[i][0]);
+			if (i == 2) {
+			    s = Bin_encrypt(Bintranstest[i][0], stoi(Bintranstest[i][2]));
+				ok = (s == Bintranstest[i][1] ? "\x1b[32mOK\x1b[0m" : "\x1b[31mERROR\x1b[0m");
+				std::cout << " Coding to binary using exact wide of symb " << std::endl;
+				std::cout << Bintranstest[i][0] << " is " <<  s << " that's " << ok << std::endl;
+			}
+			else {
+				ok = (s == Bintranstest[i][1] ? "\x1b[32mOK\x1b[0m" : "\x1b[31mERROR\x1b[0m");
+				std::cout << " Coding to binary w/o using exact wide of symb " << std::endl;
+				std::cout << Bintranstest[i][0] << " is " << s << " that's " << ok << std::endl;
+			}
+		}
 
+		std::cout << "-- Fifth - decode string to binary" << std::endl;
+		for (int i = 0; i < lenbintranstest; i++) {
+			std::string ok = "";
+			if (i == 2) {
+				std::string s = Bin_decrypt(Bintranstest[i][1], stoi(Bintranstest[i][2]));
+				ok = (s == Bintranstest[i][0] ? "\x1b[32mOK\x1b[0m" : "\x1b[31mERROR\x1b[0m");
+				std::cout << " Decoding to binary using exact wide of symb " << std::endl;
+				std::cout << Bintranstest[i][1] << " is " << s << " that's " << ok << std::endl;
+			}
+			else {
+				std::string s = Bin_decrypt(Bintranstest[i][1]);
+				ok = (s == Bintranstest[i][0] ? "\x1b[32mOK\x1b[0m" : "\x1b[31mERROR\x1b[0m");
+				std::cout << " Decoding to binary w/o using exact wide of symb " << std::endl;
+				std::cout << Bintranstest[i][1] << " is " << s << " that's " << ok << std::endl;
+			}
+		}
 
 	}
 	catch (const char* error) {

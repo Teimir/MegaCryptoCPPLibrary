@@ -1,10 +1,14 @@
 #pragma once
-//@return string binary number  
-std::string to_bin(int number);
-//@return string binary number 
-std::string to_bin(int number, int length);
-
+//@return string binary number @param int decmical number
+std::string to_bin(unsigned int number);
+//@return string binary number @param int decmical number @param int length
+std::string to_bin(unsigned int number, int wide);
+//@return int decmical number @param string binary number 
 int to_dec(std::string s);
+
+std::string Bin_encrypt(std::string s, int wide = 8);
+
+std::string Bin_decrypt(std::string s, int wide = 8);
 
 class Binary
 {
