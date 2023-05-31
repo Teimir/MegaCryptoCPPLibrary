@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Binary.cpp" />
+    <ClCompile Include="Cesar.cpp" />
     <ClCompile Include="Crypto.cpp" />
     <ClCompile Include="MegaCryptoCPPLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Binary.h" />
+    <ClInclude Include="Cesar.h" />
     <ClInclude Include="Crypto.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

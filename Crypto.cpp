@@ -3,8 +3,10 @@
 #include "Crypto.h"
 #include "Binary.h"
 
-const std::string ver = "0.1.1B";
+// version
+const std::string ver = "0.1.2B";
 
+//module 2, test 1-3
 const int lenbtest = 6;
 const std::string Btest[][3] = {{"24", "11000", "00011000"},
 	{"22", "10110", "00010110"},
@@ -13,13 +15,16 @@ const std::string Btest[][3] = {{"24", "11000", "00011000"},
 	{"568","1000111000","00111000"},
 	{"953267","11101000101110110011","10110011"}
 }; 
+
+
+//module 2, test 4-5
 const int lenbintranstest = 3;
 const std::string Bintranstest[][3] = { {"Hello", "0100100001100101011011000110110001101111"}, {"Test", "01010100011001010111001101110100"}, {"Ëÿ", "11111111111111111111111111001011111111111111111111111111111111","32"}};
 
 
 
 //Latin A-Z, a-z, Rus A-ÿ, a-ÿ
-const int Letinxs[][2] = { {65,90}, {97,122}, {192,223}, {224,255} };
+//const int Letinxs[][2] = { {65,90}, {97,122}, {192,223}, {224,255} };
 
 
 int test(bool silent)
@@ -154,6 +159,48 @@ int test(bool silent)
 	catch (const char* error) {
 		std::cout << " Binary ERROR " << std::endl << error;
 		a = 2;
+	}
+
+	//TODO:
+	// Caesar with fixed symb table 
+	// Test for Caesar
+	// Other cripters 
+
+	std::cout << std::endl << "\x1b[33m          Module 3 \x1b[0m" << std::endl << std::endl;
+	std::cout << "Cesar operations (Cesar.h)" << std::endl;
+	try {
+		std::cout << "-- First - encode " << std::endl;
+		for (int i = 0; i < lenbtest; i++) {
+			std::string bin = to_bin(stoi(Btest[i][0]));
+			std::string l = Btest[i][1] == bin ? " OK " : " ERROR ";
+			l = Btest[i][0] + " " + Btest[i][1] + " " + bin + " " + l;
+			if (Btest[i][1] != bin) {
+				std::cout << "\x1b[31m" << l << "\x1b[0m" << std::endl;
+				return 2;
+			}
+			else {
+				std::cout << "\x1b[32m" << l << "\x1b[0m" << std::endl;
+			}
+		}
+
+		std::cout << "-- Second - decode " << std::endl;
+		for (int i = 0; i < lenbtest; i++) {
+			std::string bin = to_bin(stoi(Btest[i][0]), 8);
+			std::string l = Btest[i][2] == bin ? " OK " : " ERROR ";
+			l = Btest[i][0] + " " + Btest[i][2] + " " + bin + " " + l;
+			if (Btest[i][2] != bin) {
+				std::cout << "\x1b[31m" << l << "\x1b[0m" << std::endl;
+				return 2;
+			}
+			else {
+				std::cout << "\x1b[32m" << l << "\x1b[0m" << std::endl;
+			}
+		}
+
+	}
+	catch (const char* error) {
+		std::cout << " Cesar ERROR " << std::endl << error;
+		a = 3;
 	}
 
 

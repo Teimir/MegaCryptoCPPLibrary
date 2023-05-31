@@ -4,8 +4,7 @@
 #include <cmath> 
 #include "Binary.h"
 
-//Latin A-Z, a-z, Rus A-ÿ, a-ÿ
-const int Letinxs[4][2] = { {65,90}, {97,122}, {192,223}, {224,255} };
+
 
 int to_bit(int number) {
 	if (number / 2 != 0) to_bit(number / 2);
@@ -77,13 +76,6 @@ int to_dec(std::string s) {
 		num = num + ((int)s[i] - 48) * pow(2, maxP - i);
 	}
 	return num;
-}
-
-bool in_letters(int i) {
-	for (int o = 0; o < 4; o++) {
-		if (i >= Letinxs[o][0] && i <= Letinxs[o][1]) return true;
-	}
-	return false;
 }
 
 std::string Bin_encrypt(std::string s, int wide) {
