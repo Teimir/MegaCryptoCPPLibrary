@@ -43,7 +43,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>PGInstrument</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -104,6 +105,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,15 +131,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Affine.cpp" />
+    <ClCompile Include="atbash.cpp" />
     <ClCompile Include="Binary.cpp" />
+    <ClCompile Include="Caesar.cpp" />
     <ClCompile Include="Cesar.cpp" />
     <ClCompile Include="Crypto.cpp" />
+    <ClCompile Include="DES.cpp" />
     <ClCompile Include="MegaCryptoCPPLibrary.cpp" />
+    <ClCompile Include="Scyt.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Affine.h" />
+    <ClInclude Include="atbash.h" />
     <ClInclude Include="Binary.h" />
+    <ClInclude Include="Caesar.h" />
     <ClInclude Include="Cesar.h" />
     <ClInclude Include="Crypto.h" />
+    <ClInclude Include="DES.h" />
+    <ClInclude Include="Scyt.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

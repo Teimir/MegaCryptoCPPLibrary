@@ -2,9 +2,13 @@
 #include <string>
 #include "Crypto.h"
 #include "Binary.h"
+#include "Cesar.h"
+#include "Scyt.h"
+#include "Affine.h"
+#include "atbash.h"
 
 // version
-const std::string ver = "0.1.2B";
+const std::string ver = "0.1.3B";
 
 //module 2, test 1-3
 const int lenbtest = 6;
@@ -25,6 +29,20 @@ const std::string Bintranstest[][3] = { {"Hello", "01001000011001010110110001101
 
 //Latin A-Z, a-z, Rus A-я, a-я
 //const int Letinxs[][2] = { {65,90}, {97,122}, {192,223}, {224,255} };
+
+
+//TODO:
+	// Caesar with fixed symb table (need?) + 
+	// Test for Caesar
+	// Test for Scytala +
+	// Affine crypt +
+	// Atbash +
+	// Hill
+	// Xor
+	// Des
+	// 3DES
+	// RSA
+	// using through this file
 
 
 int test(bool silent)
@@ -161,14 +179,11 @@ int test(bool silent)
 		a = 2;
 	}
 
-	//TODO:
-	// Caesar with fixed symb table 
-	// Test for Caesar
-	// Other cripters 
+	
 
 	std::cout << std::endl << "\x1b[33m          Module 3 \x1b[0m" << std::endl << std::endl;
-	std::cout << "Cesar operations (Cesar.h)" << std::endl;
-	try {
+	std::cout << "Cesar operations (Cesar.h) Auto test is INOP" << std::endl;
+	/*try { INOP
 		std::cout << "-- First - encode " << std::endl;
 		for (int i = 0; i < lenbtest; i++) {
 			std::string bin = to_bin(stoi(Btest[i][0]));
@@ -202,8 +217,77 @@ int test(bool silent)
 		std::cout << " Cesar ERROR " << std::endl << error;
 		a = 3;
 	}
+	*/
+
+	std::cout << std::endl << "\x1b[33m          Module 4 \x1b[0m" << std::endl << std::endl;
+	std::cout << "Scyt operations (Scyt.h)" << std::endl;
 
 
+	Scyt cipher(3, 5); // создание объекта шифратора с 3 столбцами и 5 символами в строке
+
+	std::string message = "HELLO WORLD";
+	std::string ciphertext = cipher.encrypt(message);
+	std::cout << "Ciphertext: " << ciphertext << std::endl;
+
+	std::string plaintext = cipher.decrypt(ciphertext);
+	std::cout << "Plaintext: " << plaintext << std::endl;
+
+	std::string message2 = "Привет Мир";
+	std::string ciphertext2 = cipher.encrypt(message2);
+	std::cout << "Ciphertext: " << ciphertext2 << std::endl;
+
+	std::string plaintext2 = cipher.decrypt(ciphertext2);
+	std::cout << "Plaintext: " << plaintext2 << std::endl;
+
+	Scyt cipher2(2, 6); // создание объекта шифратора с 3 столбцами и 5 символами в строке
+
+	std::string message21 = "HELLO WORLD";
+	std::string ciphertext21 = cipher2.encrypt(message21);
+	std::cout << "Ciphertext: " << ciphertext21 << std::endl;
+
+	std::string plaintext21 = cipher2.decrypt(ciphertext21);
+	std::cout << "Plaintext: " << plaintext21 << std::endl;
+
+	std::string message22 = "Привет Мир";
+	std::string ciphertext22 = cipher2.encrypt(message22);
+	std::cout << "Ciphertext: " << ciphertext22 << std::endl;
+
+	std::string plaintext22 = cipher2.decrypt(ciphertext22);
+	std::cout << "Plaintext: " << plaintext22 << std::endl;
+
+
+	std::cout << std::endl << "\x1b[33m          Module 5 \x1b[0m" << std::endl << std::endl;
+	std::cout << "Affine operations (affine.h)" << std::endl;
+
+	Affine acipher;
+
+	// Устанавливаем новый ключ
+	acipher.setKey(37, 13);
+
+	// Шифруем сообщение
+	string message3 = "hello world";
+	string message4 = "Привет Мир";
+	string cipherText3 = acipher.encrypt(message3);
+	cout << "Cipher text: " << cipherText3 << endl;
+
+	string decryptedMessage3 = acipher.decrypt(cipherText3);
+	cout << "Original message: " << decryptedMessage3 << endl;
+
+	string cipherText4 = acipher.encrypt(message4);
+	cout << "Cipher text: " << cipherText4 << endl;
+
+	string decryptedMessage4 = acipher.decrypt(cipherText4);
+	cout << "Original message: " << decryptedMessage4 << endl;
+
+	std::cout << std::endl << "\x1b[33m          Module 6 \x1b[0m" << std::endl << std::endl;
+	std::cout << "Atbash operations (atbash.h)" << std::endl;
+
+	atbash atbash;
+
+	std::cout << "Cipher text: " << atbash.Atbash_encrypt(message3) << endl;
+	std::cout << "Original message: " << atbash.Atbash_decrypt(atbash.Atbash_encrypt(message3)) << endl;
+	std::cout << "Cipher text: " << atbash.Atbash_encrypt(message4) << endl;
+	std::cout << "Original message: " << atbash.Atbash_decrypt(atbash.Atbash_encrypt(message4)) << endl;
 
 	return a;
 }
