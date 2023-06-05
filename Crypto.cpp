@@ -2,7 +2,7 @@
 #include <string>
 #include "Crypto.h"
 #include "Binary.h"
-#include "Cesar.h"
+#include "Caesar.h"
 #include "Scyt.h"
 #include "Affine.h"
 #include "atbash.h"
@@ -25,6 +25,7 @@ const std::string Btest[][3] = {{"24", "11000", "00011000"},
 const int lenbintranstest = 3;
 const std::string Bintranstest[][3] = { {"Hello", "0100100001100101011011000110110001101111"}, {"Test", "01010100011001010111001101110100"}, {"Ля", "11111111111111111111111111001011111111111111111111111111111111","32"}};
 
+int keya, keyb;
 
 
 //Latin A-Z, a-z, Rus A-я, a-я
@@ -266,7 +267,7 @@ int test(bool silent)
 
 	// Шифруем сообщение
 	string message3 = "hello world";
-	string message4 = "Привет Мир";
+	string message4 = "Привет Мирzzzяяяя";
 	string cipherText3 = acipher.encrypt(message3);
 	cout << "Cipher text: " << cipherText3 << endl;
 
@@ -292,11 +293,62 @@ int test(bool silent)
 	return a;
 }
 
+int init(int type, int key[]) {
+	keya = key[0];
+	keyb = key[1];
+	return 0;
+}
 
 
+string Binary_encrypt(string s) {
+	return Bin_encrypt(s);
+}
+
+string Binary_decrypt(string s) {
+	return Bin_decrypt(s);
+}
 
 
+string Scyt_encrypt(string s) {
+	Scyt cipher(keya, keyb);
+	return cipher.encrypt(s);
+}
 
+string Scyt_decrypt(string s) {
+	Scyt cipher(keya, keyb);
+	return cipher.decrypt(s);
+}
 
+string Affine_encrypt(string s) {
+	Affine acipher;
+	// Устанавливаем новый ключ
+	acipher.setKey(keya, keyb);
+	return acipher.encrypt(s);
+}
+
+string Affine_decrypt(string s) {
+	Affine acipher;
+	// Устанавливаем новый ключ
+	acipher.setKey(keya, keyb);
+	return acipher.decrypt(s);
+}
+
+string Atbash_encrypt(string s) {
+	atbash atbash;
+	return atbash.Atbash_encrypt(s);
+}
+
+string Atbash_decrypt(string s) {
+	atbash atbash;
+	return  atbash.Atbash_decrypt(s);
+}
+
+string Caesar_encrypt(string s, int offset, bool enc) {
+	return enc ? Caesar2_encrypt(s, offset) : Caesar_encrypt(s, offset);
+}
+
+string Caesar_decrypt(string s, int offset, bool enc) {
+	return enc ? Caesar2_decrypt(s, offset) : Caesar_decrypt(s, offset);
+}
 
 

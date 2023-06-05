@@ -30,6 +30,7 @@ class Affine
         string cipherText;
         for (const char& c : message) {
             int l = get_let_index(c);
+            std::cout << (mA * l + mB) % 118 << " " << Letters[(mA * l + mB) % 118] << std::endl;
             if (l == -1) cipherText.push_back(c);
             else cipherText.push_back(Letters[(mA * l + mB) % 118]);
         }
@@ -41,6 +42,7 @@ class Affine
         string message;
         for (const char& c : cipherText) {
             int l = get_let_index(c);
+            std::cout << ((get_let_index(c) - mB) * findInverseModulo118(mA)) % 118 << " " << Letters[((get_let_index(c) - mB) * findInverseModulo118(mA)) % 118] << std::endl;
             if (l == -1) message.push_back(c);
             else message.push_back(Letters[((get_let_index(c) - mB) * findInverseModulo118(mA)) % 118]);
             
