@@ -19,7 +19,7 @@ string Atbash_encrypt(string s);
 
 string Atbash_decrypt(string s);
 
-string Caesar_encrypt(string s, int offset, bool enc);
+string Caesar_encrypt(string s, int offset, bool enc = false);
 
-string Caesar_decrypt(string s, int offset, bool enc);
+string Caesar_decrypt(string s, int offset, bool enc = false);
 
